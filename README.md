@@ -44,5 +44,6 @@ Jalankan development server dengan perintah berikut:
 npm run dev
 # atau
 yarn dev
-Development server akan berjalan di http://localhost:5173. Buka browser Anda dan akses alamat tersebut untuk melihat proyek berjalan.
 ```
+
+Development server akan berjalan di http://localhost:5173. Buka browser Anda dan akses alamat tersebut untuk melihat proyek berjalan.
