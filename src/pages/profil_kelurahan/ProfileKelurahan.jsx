@@ -211,6 +211,9 @@ const ProfilKelurahan = () => {
               {/* Teks Deskripsi UMKM */}
               <div className="w-full md:w-1/2">
                 <div className="text-justify text-sm md:text-md leading-loose space-y-4">
+                  <p className="font-semibold text-font1 text-lg">
+                    Bonggol Pisang Khas Tlogosari Wetan
+                  </p>
                   <p className="text-font1">
                     Bahan dasar dari Bonggol Pisang merupakan UMKM unggulan dari
                     Kelurahan Tlogosari Wetan. Berawal dari kelompok warga

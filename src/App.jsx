@@ -6,11 +6,11 @@ import Kelembagaan from "./pages/kelembagaan/Kelembagaan";
 import VisiMisi from "./pages/profil_kelurahan/VisiMisi";
 import DetailBerita from "./pages/detailberita/DetailBerita";
 import SplashScreen from "./components/SplashScreen";
-import SaranaPrasarana from "./pages/regulasi/Regulasi";
-import SumberDaya from "./pages/sumber daya/SumberDaya";
-import Monografi from "./pages/monografi/Monografi";
-import Struktur from "./pages/struktur/Struktur";
-import Sarana from "./pages/sarana prasarana/Sarana";
+import SaranaPrasarana from "./pages/profil_kelurahan/Sarana";
+import SumberDaya from "./pages/profil_kelurahan/SumberDaya";
+import Monografi from "./pages/profil_kelurahan/Monografi";
+import Struktur from "./pages/profil_kelurahan/Struktur";
+import Sarana from "./pages/profil_kelurahan/Sarana";
 
 function App() {
   const [loading, setLoading] = useState(true);

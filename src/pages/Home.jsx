@@ -68,7 +68,7 @@ const Home = () => {
                     {news[0].bidang}
                   </p>
                   <p>
-                    {news[0].date} / {news[0].time} WIB
+                    {news[0].date} - {news[0].time} WIB
                   </p>
                 </div>
                 <div className="space-y-2 ">
@@ -101,7 +101,7 @@ const Home = () => {
                         {item.bidang}
                       </p>
                       <p>
-                        {item.date} / {item.time} WIB
+                        {item.date} - {item.time} WIB
                       </p>
                     </div>
 
