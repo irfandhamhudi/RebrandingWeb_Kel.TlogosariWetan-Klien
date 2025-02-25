@@ -6,11 +6,11 @@ import Kelembagaan from "./pages/kelembagaan/Kelembagaan";
 import VisiMisi from "./pages/profil_kelurahan/VisiMisi";
 import DetailBerita from "./pages/detailberita/DetailBerita";
 import SplashScreen from "./components/SplashScreen";
-import SaranaPrasarana from "./pages/profil_kelurahan/Sarana";
 import SumberDaya from "./pages/profil_kelurahan/SumberDaya";
 import Monografi from "./pages/profil_kelurahan/Monografi";
 import Struktur from "./pages/profil_kelurahan/Struktur";
 import Sarana from "./pages/profil_kelurahan/Sarana";
+import Regulasi from "./pages/profil_kelurahan/Regulasi";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ function App() {
             <Route path="/kelembagaan" element={<Kelembagaan />} />
             <Route path="/visi-misi" element={<VisiMisi />} />
             <Route path="/detail-berita/:title" element={<DetailBerita />} />
-            <Route path="/regulasi" element={<SaranaPrasarana />} />
+            <Route path="/regulasi" element={<Regulasi />} />
             <Route path="/sumber-daya-manusia" element={<SumberDaya />} />
             <Route path="/monografi" element={<Monografi />} />
             <Route path="/struktur-pemerintahan" element={<Struktur />} />
