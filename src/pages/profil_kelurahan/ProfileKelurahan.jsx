@@ -1,12 +1,9 @@
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+// import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import img from "../../assets/kel_tlogosari.jpg"; // Ganti dengan path gambar Anda
-import img2 from "../../assets/geo.png";
 import umkm1 from "../../assets/umkm1.jpg";
-import umkm2 from "../../assets/umkm2.jpeg";
-import umkm3 from "../../assets/umkm3.jpg";
 
 const ProfilKelurahan = () => {
   const navigate = useNavigate();
@@ -33,10 +30,10 @@ const ProfilKelurahan = () => {
 
         {/* Konten Profil Kelurahan */}
         <div className="container mx-auto px-4 lg:px-28 py-10">
-          <div className="text-lg md:text-xl font-semibold capitalize mb-5">
-            <p>Profil Kelurahan</p>
+          <div className="lg:w-[220px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
+            <p>Profil Tlogosari Wetan</p>
           </div>
-          <div className="bg-white rounded shadow p-6 md:p-10">
+          <div className="border border-opacity-50 border-font1 bg-bg1 p-3 md:p-5">
             {/* Layout Gambar dan Teks */}
             <div className="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-8">
               {/* Gambar di sebelah kiri */}
@@ -44,13 +41,13 @@ const ProfilKelurahan = () => {
                 <img
                   src={img} // Ganti dengan path gambar Anda
                   alt="Kelurahan Tlogosari Wetan"
-                  className="w-full h-auto rounded shadow"
+                  className="w-full h-auto "
                 />
               </div>
 
               {/* Teks di sebelah kanan */}
               <div className="w-full md:w-1/2">
-                <div className="text-justify text-sm md:text-md leading-loose space-y-4">
+                <div className="text-justify text-sm lg:text-md leading-loose space-y-4">
                   <p className="font-semibold text-lg text-font1">
                     Assalamu{"'"}alaikum Wr. Wb.
                   </p>
@@ -81,101 +78,9 @@ const ProfilKelurahan = () => {
                     rendahnya tingkat Sumber Daya Manusia ( SDM ), dan tingkat
                     masyarakat yang kurang.
                   </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Kondisi Geografis */}
-            <div className="mt-8">
-              <div className="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-8">
-                {/* Gambar di sebelah kiri */}
-                <div className="w-full md:w-1/2 flex justify-center">
-                  <img
-                    src={img2} // Ganti dengan path gambar Anda
-                    alt="Kelurahan Tlogosari Wetan"
-                    className="w-full h-auto rounded shadow"
-                  />
-                </div>
-
-                {/* Teks di sebelah kanan */}
-                <div className="w-full md:w-1/2">
-                  <div className="text-justify text-sm md:text-md leading-loose space-y-2">
-                    <p className="font-semibold text-lg text-font1">
-                      Kondisi Geografis
-                    </p>
-                    <p className="text-font1">
-                      Luas Wilayah{" "}
-                      <span className="font-semibold">
-                        {"\u00B1"} 125.515 Ha
-                      </span>
-                    </p>
-                    <p>Batas-batas Wilayah : </p>
-                    <p>
-                      Sebelah Utara :{" "}
-                      <span className="font-semibold">
-                        Kelurahan Bangetayu Kulon
-                      </span>{" "}
-                    </p>
-                    <p>
-                      Sebelah Timur :{" "}
-                      <span className="font-semibold">
-                        Kelurahan Tlogomulyo
-                      </span>{" "}
-                    </p>
-                    <p>
-                      Sebelah Selatan :{" "}
-                      <span className="font-semibold">
-                        {" "}
-                        Kelurahan Pedurungan Tengah{" "}
-                      </span>
-                    </p>
-                    <p>
-                      Sebelah Barat :{" "}
-                      <span className="font-semibold">
-                        Kelurahan Tlogosari Kulon
-                      </span>{" "}
-                    </p>
-                    <div className="mt-8">
-                      <h2 className="font-semibold text-lg text-font1 mb-4">
-                        Kondisi Demografi
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Jumlah Penduduk */}
-                        <div className="text-sm space-y-2 leading-loose">
-                          <p className="font-semibold text-font1 text-md">
-                            Jumlah Penduduk (Februari 2024)
-                          </p>
-                          <p className="text-font1">Total: 9.080 jiwa</p>
-                          <p className="text-font1">Laki-laki: 4.550 jiwa</p>
-                          <p className="text-font1">Perempuan: 4.530 jiwa</p>
-                        </div>
-
-                        {/* Jumlah RW dan RT */}
-                        <div className="text-sm space-y-2 leading-loose">
-                          <p className="font-semibold text-font1 text-md">
-                            Jumlah RW dan RT
-                          </p>
-                          <p className="text-font1">Jumlah RW: 4</p>
-                          <p className="text-font1">
-                            - RW I : terdiri dari{" "}
-                            <span className="font-semibold">13</span> RT
-                          </p>
-                          <p className="text-font1">
-                            - RW II : terdiri dari{" "}
-                            <span className="font-semibold">10</span> RT
-                          </p>
-                          <p className="text-font1">
-                            - RW III : terdiri dari{" "}
-                            <span className="font-semibold">12</span> RT
-                          </p>
-                          <p className="text-font1">
-                            - RW IV : terdiri dari{" "}
-                            <span className="font-semibold">11</span> RT
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <p className="font-semibold text-lg text-font1">
+                    Wassalamu{"'"}alaikum Wr. Wb.
+                  </p>
                 </div>
               </div>
             </div>
@@ -184,27 +89,17 @@ const ProfilKelurahan = () => {
 
         {/* UMKM Unggulan */}
         <div className="container mx-auto px-4 lg:px-28">
-          <div className="text-lg md:text-xl font-semibold capitalize mb-5">
+          <div className="lg:w-[310px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
             <p>UMKM Unggulan Tlogosari Wetan</p>
           </div>
-          <div className="bg-white rounded shadow p-6 md:p-10">
-            <div className="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-8">
+          <div className="border border-opacity-50 border-font1 bg-bg1 p-3 md:p-7">
+            <div className="flex flex-col md:flex-row  items-center md:items-start space-y-8 md:space-y-0 md:space-x-8">
               {/* Gambar UMKM */}
-              <div className="w-full md:w-1/2 flex flex-col md:flex-row gap-4 md:gap-0">
+              <div className="w-full md:w-1/2 flex flex-col  md:flex-row gap-4 md:gap-4">
                 <img
                   src={umkm1}
                   alt="UMKM 1"
-                  className="w-full md:w-1/3 h-auto rounded object-cover"
-                />
-                <img
-                  src={umkm2}
-                  alt="UMKM 2"
-                  className="w-full md:w-1/3 h-auto rounded object-cover"
-                />
-                <img
-                  src={umkm3}
-                  alt="UMKM 3"
-                  className="w-full md:w-1/3 h-auto rounded object-cover"
+                  className="w-full md:w-full h-[515px] object-cover"
                 />
               </div>
 
@@ -249,10 +144,10 @@ const ProfilKelurahan = () => {
 
         {/* Lokasi Tlogosari Wetan */}
         <div className="container mx-auto px-4 lg:px-28 p-10">
-          <div className="text-lg md:text-xl font-semibold capitalize mb-5">
+          <div className="lg:w-[230px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
             <p>Lokasi Tlogosari Wetan</p>
           </div>
-          <div className="bg-white rounded shadow p-6 md:p-10">
+          <div className="border border-opacity-50 border-font1 bg-bg1 md:p-7">
             {/* Embed Google Maps */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.123456789012!2d110.4662907!3d-6.9924176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708cd8c5fc3715%3A0x9bf8fff6007b754c!2sKantor%20Kelurahan%20Tlogosari%20Wetan!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
@@ -266,7 +161,7 @@ const ProfilKelurahan = () => {
           </div>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );

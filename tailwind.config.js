@@ -11,6 +11,9 @@ export default {
         font1: "#242424",
         font2: "#565656",
         font3: "#C7C7C7",
+        grayscale: {
+          100: "100%",
+        },
       },
     },
   },

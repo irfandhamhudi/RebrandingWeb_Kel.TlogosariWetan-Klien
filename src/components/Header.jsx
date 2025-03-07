@@ -92,14 +92,20 @@ const Header = () => {
   return (
     <div>
       {/* Navbar */}
-      <div className="relative p-4 border-b flex items-center justify-between px-4 md:px-28 bg-white">
+      <div className="relative p-4 border-b flex items-center justify-between px-4 md:px-28 bg-bg1">
         <div className="flex gap-3">
           <Link to="/">
-            <img src={logo} alt="Logo Kota Semarang" className="w-16 h-16" />
+            <img
+              src={logo}
+              alt="Logo Kota Semarang"
+              className="lg:w-16 lg:h-16 w-12 h-12"
+            />
           </Link>
           <div>
-            <h1 className="font-bold text-xl text-font1">Kelurahan </h1>
-            <h2 className="font-bold text-xl text-font1">Tlogosari Wetan</h2>
+            <h1 className="font-semibold lg:text-xl text-font1">Kelurahan </h1>
+            <h2 className="font-semibold lg:text-xl text-font1">
+              Tlogosari Wetan
+            </h2>
           </div>
         </div>
 
@@ -139,25 +145,26 @@ const Header = () => {
               label: "Kelembagaan",
               path: "/kelembagaan",
               submenus: [
-                { label: "LPMK", path: "/lpmk" },
-                { label: "PKK", path: "/pkk" },
-                { label: "FKK", path: "/fkk" },
-                { label: "BKM", path: "/bkm" },
+                { label: "Umum", path: "/kelembagaan/Umum" },
+                { label: "LPMK", path: "/kelembagaan/LPMK" },
+                { label: "PKK", path: "/kelembagaan/PKK" },
+                { label: "FKK", path: "/kelembagaan/FKK" },
+                { label: "BKM", path: "/kelembagaan/BKM" },
               ],
             },
             {
               label: "Pemberdayaan",
               path: "/pemberdayaan",
               submenus: [
-                { label: "Bidang Kamtibmas", path: "/pemberdayaan/kamtibmas" },
-                { label: "Bidang Kesehatan", path: "/pemberdayaan/kesehatan" },
+                { label: "Bidang Kamtibmas", path: "/pemberdayaan/Kamtibmas" },
+                { label: "Bidang Kesehatan", path: "/pemberdayaan/Kesehatan" },
                 {
                   label: "Bidang Pariwisata",
-                  path: "/pemberdayaan/pariwisata",
+                  path: "/pemberdayaan/Pariwisata",
                 },
                 {
                   label: "Bidang Pendidikan",
-                  path: "/pemberdayaan/pendidikan",
+                  path: "/pemberdayaan/Pendidikan",
                 },
               ],
             },
@@ -175,7 +182,7 @@ const Header = () => {
               <Link to={item.path}>{item.label}</Link>
               {openDropdown === item.label && (
                 <ul
-                  className="absolute left-0 mt-2 w-56 bg-white border border-gray-300 shadow-md p-3 rounded"
+                  className="absolute left-0 mt-2 w-56 bg-white border border-gray-300 shadow-md p-3"
                   onMouseEnter={() => toggleDropdown(item.label)}
                   onMouseLeave={closeDropdown}
                 >
@@ -216,7 +223,7 @@ const Header = () => {
           </li>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-primary text-white py-2 px-4 text-sm rounded"
+            className="bg-primary hover:bg-secondary text-white py-2 px-4 text-sm "
           >
             Pengaduan Layanan
           </button>
@@ -225,7 +232,7 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
-            <div className="bg-white p-7 rounded w-full max-w-sm relative max-h-[90vh] overflow-y-auto">
+            <div className="bg-white p-7 w-full max-w-sm relative max-h-[90vh] overflow-y-auto">
               <button
                 onClick={toggleMobileMenu}
                 className="absolute top-4 right-4 text-gray-500 hover:text-font2"
@@ -265,10 +272,11 @@ const Header = () => {
                     label: "Kelembagaan",
                     path: "/kelembagaan",
                     submenus: [
-                      { label: "LPMK", path: "/lpmk" },
-                      { label: "PKK", path: "/pkk" },
-                      { label: "FKK", path: "/fkk" },
-                      { label: "BKM", path: "/bkm" },
+                      { label: "Umum", path: "/kelembagaan/Umum" },
+                      { label: "LPMK", path: "/kelembagaan/LPMK" },
+                      { label: "PKK", path: "/kelembagaan/PKK" },
+                      { label: "FKK", path: "/kelembagaan/FKK" },
+                      { label: "BKM", path: "/kelembagaan/BKM" },
                     ],
                   },
                   {
@@ -277,19 +285,19 @@ const Header = () => {
                     submenus: [
                       {
                         label: "Bidang Kamtibmas",
-                        path: "/pemberdayaan/kamtibmas",
+                        path: "/pemberdayaan/Kamtibmas",
                       },
                       {
                         label: "Bidang Kesehatan",
-                        path: "/pemberdayaan/kesehatan",
+                        path: "/pemberdayaan/Kesehatan",
                       },
                       {
                         label: "Bidang Pariwisata",
-                        path: "/pemberdayaan/pariwisata",
+                        path: "/pemberdayaan/Pariwisata",
                       },
                       {
                         label: "Bidang Pendidikan",
-                        path: "/pemberdayaan/pendidikan",
+                        path: "/pemberdayaan/Pendidikan",
                       },
                     ],
                   },
@@ -342,7 +350,7 @@ const Header = () => {
                 </li>
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="bg-primary text-white py-2 px-4 text-sm rounded"
+                  className="bg-primary hover:bg-secondary text-white py-2 px-4 text-sm "
                 >
                   Pengaduan Layanan
                 </button>
@@ -354,7 +362,7 @@ const Header = () => {
         {/* Modal Pengaduan Layanan */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 text-sm px-4">
-            <div className="bg-white p-7 rounded w-full max-w-xl relative max-h-[90vh] overflow-y-auto">
+            <div className="bg-white p-7  w-full max-w-xl relative max-h-[90vh] overflow-y-auto">
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-4 right-4 text-gray-500 hover:text-font2"
@@ -374,7 +382,7 @@ const Header = () => {
                     name="nama"
                     value={formData.nama}
                     onChange={handleInputChange}
-                    className="mt-1 p-2 w-full border rounded"
+                    className="mt-1 p-2 w-full border "
                     required
                   />
                 </div>
@@ -387,7 +395,7 @@ const Header = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="mt-1 p-2 w-full border rounded"
+                    className="mt-1 p-2 w-full border"
                     required
                   />
                 </div>
@@ -400,7 +408,7 @@ const Header = () => {
                     name="noTelp"
                     value={formData.noTelp}
                     onChange={handleInputChange}
-                    className="mt-1 p-2 w-full border rounded"
+                    className="mt-1 p-2 w-full border "
                     required
                   />
                 </div>
@@ -412,7 +420,7 @@ const Header = () => {
                     name="isiPengaduan"
                     value={formData.isiPengaduan}
                     onChange={handleInputChange}
-                    className="mt-1 p-2 w-full border rounded"
+                    className="mt-1 p-2 w-full border "
                     rows="4"
                     required
                   />
@@ -426,7 +434,7 @@ const Header = () => {
                     type="file"
                     name="buktiPengaduan"
                     onChange={handleFileChange}
-                    className="mt-1 p-2 w-full border rounded text-sm"
+                    className="mt-1 p-2 w-full border text-sm"
                     accept="image/*"
                     multiple
                     disabled={formData.buktiPengaduan.length >= 5}
@@ -441,11 +449,11 @@ const Header = () => {
                           <img
                             src={image}
                             alt={`Preview ${index + 1}`}
-                            className="mt-2 md:w-20 md:h-20 w-20 h-20 object-cover rounded border"
+                            className="mt-5 md:w-20 md:h-20 w-20 h-20 object-cover border"
                           />
                           <button
                             onClick={() => removeImage(index)}
-                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                            className="absolute top-2 -right-2 bg-red-500 text-white rounded-full p-1"
                           >
                             <X size={14} />
                           </button>
@@ -457,7 +465,7 @@ const Header = () => {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="bg-primary text-white py-2 px-4 rounded hover:bg-primary-dark"
+                    className="bg-primary hover:bg-secondary text-white py-2 px-4"
                   >
                     Kirim Pengaduan
                   </button>

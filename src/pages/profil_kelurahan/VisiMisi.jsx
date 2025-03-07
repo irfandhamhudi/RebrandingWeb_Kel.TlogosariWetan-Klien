@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+// import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import fto from "../../assets/foto-kantor.jpg";
@@ -33,7 +33,10 @@ const VisiMisi = () => {
         </div>
 
         <div className="container px-4 lg:px-28 py-10">
-          <div className="bg-white p-10 rounded shadow w-2/3 flex flex-col justify-center items-center mx-auto">
+          <div className="lg:w-[340px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
+            <p>Visi & Misi Kelurahan Tlogosari Wetan</p>
+          </div>
+          <div className="border border-opacity-50 border-font1 bg-bg1 p-3 lg:p-5 lg:w-full flex flex-col justify-center items-center mx-auto">
             {/* Layout Gambar dan Teks */}
             <div className="flex flex-col items-center space-y-8 ">
               {/* Gambar di atas */}
@@ -41,13 +44,13 @@ const VisiMisi = () => {
                 <img
                   src={fto}
                   alt="Kelurahan Tlogosari Wetan"
-                  className="w-full h-auto rounded shadow"
+                  className="w-full h-auto"
                 />
               </div>
 
               {/* Teks di bawah gambar */}
               <div className="w-full">
-                <div className="text-justify text-sm md:text-md leading-loose space-y-4">
+                <div className="text-justify  md:text-md leading-loose space-y-4">
                   <p className="text-font1">
                     Untuk mewujudkan aspirasi di masa yang akan datang, perlu
                     adanya gambaran ruang lingkup kegiatan yang sedang dan akan
@@ -93,7 +96,7 @@ const VisiMisi = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );

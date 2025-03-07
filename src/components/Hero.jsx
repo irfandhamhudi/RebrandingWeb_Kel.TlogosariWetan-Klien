@@ -1,44 +1,60 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // Impor ikon dari Lucide
-import baner1 from "../assets/baner1.jpeg";
-import baner2 from "../assets/baner2.png";
-
-const images = [baner1, baner2];
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { getAllSlider } from "../data/Slider"; // Pastikan path ini benar
 
 const Hero = () => {
-  const navigationPrevRef = useRef(null); // Ref untuk tombol prev
-  const navigationNextRef = useRef(null); // Ref untuk tombol next
+  const navigationPrevRef = useRef(null);
+  const navigationNextRef = useRef(null);
+  const [sliderData, setSliderData] = useState([]); // State untuk menyimpan URL gambar
+
+  // Fetch data slider dari API
+  useEffect(() => {
+    const fetchSliderData = async () => {
+      try {
+        const response = await getAllSlider(); // Panggil fungsi untuk mengambil data slider
+
+        // Ekstrak semua URL gambar dari array `images` di setiap item
+        const imageUrls = response.data.flatMap((item) => item.images);
+
+        // Simpan URL gambar ke state
+        setSliderData(imageUrls);
+      } catch (error) {
+        console.error("Gagal mengambil data slider:", error);
+      }
+    };
+
+    fetchSliderData();
+  }, []); // Jalankan sekali saat komponen dimuat
 
   return (
-    <div className="relative px-4 lg:px-10 lg:py-5 py-2 mx-auto">
+    <div className="relative mx-auto">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
         navigation={{
-          prevEl: navigationPrevRef.current, // Tombol prev kustom
-          nextEl: navigationNextRef.current, // Tombol next kustom
+          prevEl: navigationPrevRef.current,
+          nextEl: navigationNextRef.current,
         }}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        loop
-        className="w-full aspect-[16/9] rounded-md"
+        autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay diaktifkan
+        loop={sliderData.length >= 3} // Aktifkan loop hanya jika ada cukup slide
+        className="w-full" // Tambahkan tinggi yang tetap
         onBeforeInit={(swiper) => {
-          // Assign ref ke Swiper instance
           swiper.params.navigation.prevEl = navigationPrevRef.current;
           swiper.params.navigation.nextEl = navigationNextRef.current;
         }}
       >
-        {images.map((image, index) => (
+        {sliderData.map((imageUrl, index) => (
           <SwiperSlide key={index}>
             <img
-              src={image}
+              src={imageUrl} // Gunakan URL gambar dari API
               alt={`Banner ${index + 1}`}
               className="w-full h-full object-cover"
             />
