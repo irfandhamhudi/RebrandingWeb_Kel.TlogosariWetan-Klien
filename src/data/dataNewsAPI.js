@@ -1,7 +1,8 @@
 // src/api.js
 import axios from "axios";
 
-const API_URL = "https://api-website-nine.vercel.app/api/v1/data"; // Sesuaikan dengan URL backend
+const API_URL = "https://api-website-delta.vercel.app/api/v1/data"; // Sesuaikan dengan URL backend
+// const API_URL = "http://localhost:5000/api/v1/data";
 
 export const createData = async (formData) => {
   try {
@@ -9,7 +10,6 @@ export const createData = async (formData) => {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -19,9 +19,7 @@ export const createData = async (formData) => {
 
 export const getAllData = async () => {
   try {
-    const response = await axios.get(`${API_URL}/all`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${API_URL}/all`, {});
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
@@ -30,9 +28,7 @@ export const getAllData = async () => {
 
 export const getDataByBidang = async (bidang) => {
   try {
-    const response = await axios.get(`${API_URL}/bidang/${bidang}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${API_URL}/bidang/${bidang}`, {});
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
@@ -51,9 +47,7 @@ export const getDataByTitle = async (title) => {
     const formattedTitle = title.trim().replace(/\s+/g, "-");
 
     // Kirim request ke backend
-    const response = await axios.get(`${API_URL}/${formattedTitle}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${API_URL}/${formattedTitle}`, {});
 
     // Jika data ditemukan, kembalikan data
     if (response.data.success) {

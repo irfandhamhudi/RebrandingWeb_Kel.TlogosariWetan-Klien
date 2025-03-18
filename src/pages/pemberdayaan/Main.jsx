@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDataByBidang } from "../../data/dataNewsAPI";
 import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { HashLoader } from "react-spinners";
 import ErrorNews from "../error/errorNews";
@@ -86,7 +86,7 @@ const Pemberdayaan = () => {
         {/* Konten Utama */}
         <div className="container mx-auto px-4 lg:px-28 py-10 flex-grow">
           {data.length > 0 && (
-            <h1 className="lg:w-[230px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
+            <h1 className="lg:w-[230px] border  border-gray-300 bg-white  p-4 mb-4">
               Total{" "}
               <span className="font-semibold text-font1">{data.length}</span>{" "}
               Berita ditemukan
@@ -97,17 +97,17 @@ const Pemberdayaan = () => {
               {data.map((item, index) => (
                 <div
                   key={index}
-                  className="border border-font1 border-opacity-50 bg-bg1 p-4 transition-all duration-300 hover:scale-105 animate-fade-in"
+                  className="border  border-gray-300 bg-white  p-4 transition-all duration-300 hover:scale-105 animate-fade-in"
                 >
                   {/* Layout Gambar dan Konten */}
                   <div className="lg:flex items-start gap-4">
                     {/* Gambar */}
                     {item.images.length > 0 && (
-                      <div className="relative overflow-hidden rounded">
+                      <div className="relative overflow-hidden">
                         <img
                           src={item.images[0]}
                           alt={`Gambar ${item.title}`}
-                          className="lg:w-36 lg:h-36 object-cover rounded transition-all duration-300 hover:scale-110 hover:brightness-75"
+                          className="lg:w-36 lg:h-36 object-cover transition-all duration-300 hover:scale-110 hover:brightness-75"
                         />
                       </div>
                     )}
@@ -163,7 +163,7 @@ const Pemberdayaan = () => {
           )}
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

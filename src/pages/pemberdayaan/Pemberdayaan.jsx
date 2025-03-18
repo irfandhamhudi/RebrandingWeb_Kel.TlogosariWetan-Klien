@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -71,14 +71,14 @@ const Pemberdayaan = () => {
         </div>
 
         <div className="container px-4 lg:px-28 py-10 min-h-screen space-y-5">
-          <div className="lg:text-md border lg:w-[260px] border-font1 border-opacity-50 bg-bg1 py-2 px-7 lg:px-5">
+          <div className="lg:text-md border lg:w-[260px]  border-gray-300 bg-white  py-2 px-7 lg:px-5">
             <p>Pemberdayaan Masyarakat</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {bidangData.map((bidang) => (
               <div
                 key={bidang.id}
-                className="border border-font1 border-opacity-50 bg-bg1 p-6 lg:p-8 text-justify flex flex-col items-center"
+                className="border  border-gray-300 bg-white  p-6 lg:p-8 text-justify flex flex-col items-center"
               >
                 {/* Logo Bidang */}
                 <img
@@ -94,7 +94,7 @@ const Pemberdayaan = () => {
             ))}
           </div>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

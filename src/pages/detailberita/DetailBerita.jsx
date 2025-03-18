@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { getDataByTitle } from "../../data/dataNewsAPI"; // Sesuaikan path-nya
+import { HashLoader } from "react-spinners";
 
 const DetailBerita = () => {
   const { title } = useParams(); // Ambil parameter `title` dari URL
@@ -30,8 +31,8 @@ const DetailBerita = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <p>Loading...</p>
+      <div className="h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-black bg-opacity-50 w-full flex">
+        <HashLoader color="#C0392B" size={50} />
       </div>
     );
   }
@@ -88,7 +89,7 @@ const DetailBerita = () => {
         </div>
 
         <div className="flex items-center justify-center container mx-auto px-4 lg:px-28 py-10">
-          <div className="border border-font1 border-opacity-50 p-6 lg:p-7 bg-bg1 lg:w-5/6">
+          <div className="border  border-gray-300 bg-white  p-6 lg:p-7  lg:w-5/6">
             <h1 className="lg:text-2xl text-xl font-medium mb-4">
               {data.title}
             </h1>
@@ -118,7 +119,7 @@ const DetailBerita = () => {
             <div className="text-font2">{descriptionParagraphs}</div>
           </div>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

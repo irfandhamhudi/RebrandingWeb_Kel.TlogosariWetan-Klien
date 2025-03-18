@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5174, // Mengatur server berjalan pada port 5174
+    port: 3001, // Ganti dengan port yang Anda inginkan
+    host: "0.0.0.0", // Ini memungkinkan akses dari jaringan luar (opsional)
   },
 });

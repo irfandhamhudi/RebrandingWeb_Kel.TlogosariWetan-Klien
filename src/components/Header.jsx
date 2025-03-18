@@ -2,26 +2,30 @@ import { X, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/logo-kota-semarang.png";
+import { createServiceComplain } from "../data/serviceComplain";
+import toast from "react-hot-toast";
+import { HashLoader } from "react-spinners";
 
 const Header = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    nama: "",
+    name: "",
     email: "",
-    noTelp: "",
-    isiPengaduan: "",
-    buktiPengaduan: [],
-    previewImages: [],
+    phone: "",
+    msg: "",
+    images: [],
+    // previewImages: [], // Tambahkan ini
   });
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
 
-    if (formData.buktiPengaduan.length + files.length > 5) {
-      alert("Maksimal hanya bisa mengupload 5 gambar!");
+    if (formData.images.length + files.length > 5) {
+      toast.error("Maksimal 5 gambar.");
       return;
     }
 
@@ -29,43 +33,65 @@ const Header = () => {
 
     setFormData((prevData) => ({
       ...prevData,
-      buktiPengaduan: [...prevData.buktiPengaduan, ...files],
-      previewImages: [...prevData.previewImages, ...newFileURLs],
+      images: [...prevData.images, ...files],
+      previewImages: [...(prevData.previewImages || []), ...newFileURLs], // Pastikan prevData.previewImages ada
     }));
   };
 
   const removeImage = (index) => {
     setFormData((prevData) => {
-      const updatedFiles = prevData.buktiPengaduan.filter(
+      const updatedFiles = prevData.images.filter((_, i) => i !== index);
+      const updatedPreviews = (prevData.previewImages || []).filter(
         (_, i) => i !== index
-      );
-      const updatedPreviews = prevData.previewImages.filter(
-        (_, i) => i !== index
-      );
+      ); // Pastikan prevData.previewImages ada
       return {
         ...prevData,
-        buktiPengaduan: updatedFiles,
+        images: updatedFiles,
         previewImages: updatedPreviews,
       };
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Data Pengaduan:", formData);
+    setIsLoading(true);
 
-    setFormData({
-      nama: "",
-      email: "",
-      noTelp: "",
-      isiPengaduan: "",
-      buktiPengaduan: [],
-      previewImages: [],
-    });
+    try {
+      // Membuat FormData untuk mengirim file
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phone);
+      formDataToSend.append("msg", formData.msg);
 
-    alert("Pengaduan berhasil dikirim!");
+      // Menambahkan file ke FormData
+      formData.images.forEach((file) => {
+        formDataToSend.append(`images`, file);
+      });
 
-    setIsModalOpen(false);
+      // Memanggil fungsi createServiceComplain
+      const response = await createServiceComplain(formDataToSend);
+
+      if (response.success) {
+        toast.success(response.message);
+        setIsModalOpen(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          msg: "",
+          images: [],
+          // previewImages: [],
+        });
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      console.error("Error submitting complaint:", error);
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -91,6 +117,11 @@ const Header = () => {
 
   return (
     <div>
+      {isLoading && (
+        <div className="h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-black bg-opacity-50 w-full flex z-50">
+          <HashLoader color="#C0392B" size={50} />
+        </div>
+      )}
       {/* Navbar */}
       <div className="relative p-4 border-b flex items-center justify-between px-4 md:px-28 bg-bg1">
         <div className="flex gap-3">
@@ -361,7 +392,7 @@ const Header = () => {
 
         {/* Modal Pengaduan Layanan */}
         {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 text-sm px-4">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-0 text-sm px-4">
             <div className="bg-white p-7  w-full max-w-xl relative max-h-[90vh] overflow-y-auto">
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -379,8 +410,8 @@ const Header = () => {
                   </label>
                   <input
                     type="text"
-                    name="nama"
-                    value={formData.nama}
+                    name="name"
+                    value={formData.name}
                     onChange={handleInputChange}
                     className="mt-1 p-2 w-full border "
                     required
@@ -405,8 +436,8 @@ const Header = () => {
                   </label>
                   <input
                     type="tel"
-                    name="noTelp"
-                    value={formData.noTelp}
+                    name="phone"
+                    value={formData.phone}
                     onChange={handleInputChange}
                     className="mt-1 p-2 w-full border "
                     required
@@ -417,8 +448,8 @@ const Header = () => {
                     Isi Pengaduan <span className="text-red-500">*</span>
                   </label>
                   <textarea
-                    name="isiPengaduan"
-                    value={formData.isiPengaduan}
+                    name="msg"
+                    value={formData.msg}
                     onChange={handleInputChange}
                     className="mt-1 p-2 w-full border "
                     rows="4"
@@ -432,36 +463,37 @@ const Header = () => {
                   </label>
                   <input
                     type="file"
-                    name="buktiPengaduan"
+                    name="images"
                     onChange={handleFileChange}
                     className="mt-1 p-2 w-full border text-sm"
                     accept="image/*"
                     multiple
-                    disabled={formData.buktiPengaduan.length >= 5}
+                    disabled={formData.images.length >= 5}
                   />
                 </div>
-                {formData.previewImages.length > 0 && (
-                  <div className="mb-4">
-                    <p className="text-sm text-font2">Preview Gambar:</p>
-                    <div className="flex gap-2 flex-wrap">
-                      {formData.previewImages.map((image, index) => (
-                        <div key={index} className="relative">
-                          <img
-                            src={image}
-                            alt={`Preview ${index + 1}`}
-                            className="mt-5 md:w-20 md:h-20 w-20 h-20 object-cover border"
-                          />
-                          <button
-                            onClick={() => removeImage(index)}
-                            className="absolute top-2 -right-2 bg-red-500 text-white rounded-full p-1"
-                          >
-                            <X size={14} />
-                          </button>
-                        </div>
-                      ))}
+                {formData.previewImages &&
+                  formData.previewImages.length > 0 && (
+                    <div className="mb-4">
+                      <p className="text-sm text-font2">Preview Gambar:</p>
+                      <div className="flex gap-2 flex-wrap">
+                        {formData.previewImages.map((image, index) => (
+                          <div key={index} className="relative">
+                            <img
+                              src={image}
+                              alt={`Preview ${index + 1}`}
+                              className="mt-5 md:w-20 md:h-20 w-20 h-20 object-cover border"
+                            />
+                            <button
+                              onClick={() => removeImage(index)}
+                              className="absolute top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                            >
+                              <X size={14} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
                 <div className="flex justify-end">
                   <button
                     type="submit"

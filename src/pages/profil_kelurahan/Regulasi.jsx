@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -34,17 +34,17 @@ const Regulasi = () => {
           </div>
         </div>
         <div className="container mx-auto px-4 lg:px-32 py-10 flex flex-col">
-          <div className="lg:w-[190px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
+          <div className="lg:w-[190px] border  border-gray-300 bg-white  p-4 mb-4">
             <p>Regulasi Kelurahan</p>
           </div>
           <div className="w-full h-screen flex">
             <iframe
               src="https://datakelurahan.semarangkota.go.id/regulasi"
-              className="w-full h-full border border-opacity-50 border-font1 bg-bg1 p-3 lg:p-5"
+              className="w-full h-full border  border-gray-300 bg-white  p-3 lg:p-5"
             ></iframe>
           </div>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

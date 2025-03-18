@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import { useNavigate } from "react-router-dom";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 import { data } from "../components/data/data"; // Impor data layanan
 import { getAllData } from "../data/dataNewsAPI"; // Impor fungsi untuk mengambil data berita
 import { formatTitleForURL } from "../utils/formatTitle";
@@ -15,11 +15,20 @@ const Home = () => {
   const [newsData, setNewsData] = useState([]);
 
   useEffect(() => {
-    // Ambil data berita
-    getAllData().then((res) => {
-      // console.log(res.data);
-      setNewsData(res.data);
-    });
+    const fetchNewsData = async () => {
+      try {
+        const response = await getAllData();
+        setNewsData(response.data);
+      } catch (error) {
+        console.error("Error fetching news data:", error);
+      }
+    };
+
+    fetchNewsData();
+
+    return () => {
+      setNewsData([]);
+    };
   }, []);
 
   const truncateText = (text, maxLength) => {
@@ -39,12 +48,12 @@ const Home = () => {
 
         {/* Kependudukan */}
         <div className="flex flex-col items-center text-font1 py-10 space-y-12">
-          <div className="lg:text-md border border-font1 border-opacity-50 bg-bg1 py-2 px-7 lg:px-10">
+          <div className="lg:text-md border  border-gray-300 bg-white py-2 px-7 lg:px-10">
             <p>Kependudukan Kelurahan </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-10 md:px-28">
-            <div className="relative border border-font1 border-opacity-50 bg-bg1 p-10 lg:p-10">
+            <div className="relative border  border-gray-300 bg-white p-10 lg:p-10">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-white bg-primary p-2 rounded-full">
                 <User />
               </div>
@@ -54,7 +63,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="relative border border-font1 border-opacity-50 bg-bg1 p-10 lg:p-10">
+            <div className="relative border  border-gray-300 bg-white p-10 lg:p-10">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-white bg-primary p-2 rounded-full">
                 <User />
               </div>
@@ -64,7 +73,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="relative border border-font1 border-opacity-50 bg-bg1 p-10 lg:p-10">
+            <div className="relative border  border-gray-300 bg-white p-10 lg:p-10">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-white bg-primary p-2 rounded-full">
                 <User />
               </div>
@@ -74,7 +83,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="relative border border-font1 border-opacity-50 bg-bg1 p-10 lg:p-10">
+            <div className="relative border  border-gray-300 bg-white p-10 lg:p-10">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-white bg-primary p-2 rounded-full">
                 <Building2 />
               </div>
@@ -83,7 +92,7 @@ const Home = () => {
                 <p className="text-xs">Jumlah RT</p>
               </div>
             </div>
-            <div className="relative border border-font1 border-opacity-50 bg-bg1 p-10 lg:p-10">
+            <div className="relative border  border-gray-300 bg-white p-10 lg:p-10">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-white bg-primary p-2 rounded-full">
                 <Building />
               </div>
@@ -92,7 +101,7 @@ const Home = () => {
                 <p className="text-xs">Jumlah RW</p>
               </div>
             </div>
-            <div className="relative border border-font1 border-opacity-50 bg-bg1 p-10 lg:p-10">
+            <div className="relative border  border-gray-300 bg-white p-10 lg:p-10">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-white bg-primary p-2 rounded-full">
                 <Map />
               </div>
@@ -107,7 +116,7 @@ const Home = () => {
         {/* Bagian Berita */}
         <div className="flex flex-col items-center text-font1 py-10 space-y-5 px-4 md:px-0 ">
           <div className="lg:flex lg:justify-between items-center lg:w-full lg:px-28 flex ">
-            <p className="lg:text-md border border-opacity-50 border-font1 bg-bg1 py-2 px-7 lg:px-5">
+            <p className="lg:text-md border border-gray-300 bg-white py-2 px-7 lg:px-5">
               Berita & Pengumuman Terbaru
             </p>
             <p
@@ -119,7 +128,7 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col lg:flex-row w-full mx-auto space-y-6 lg:space-y-0 lg:space-x-6 px-5 md:px-28 justify-center">
-            <div className="cursor-pointer w-full lg:w-1/2 space-y-1 border border-font1 border-opacity-50 bg-bg1 p-3 sm:p-4 transition-all duration-300 hover:scale-105 animate-fade-in">
+            <div className="cursor-pointer w-full lg:w-1/2 space-y-1 border  border-gray-300 bg-white p-3 sm:p-4 transition-all duration-300 hover:scale-105 animate-fade-in">
               <div className="overflow-hidden relative">
                 <img
                   src={newsData[0]?.images[0]}
@@ -159,7 +168,7 @@ const Home = () => {
               {newsData.slice(1, 4).map((item, index) => (
                 <div
                   key={index}
-                  className="cursor-pointer flex flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-5 border border-opacity-50 border-font1 bg-bg1 p-3 lg:p-4  transition-all duration-300 hover:scale-105 animate-fade-in"
+                  className="cursor-pointer flex flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-5 border  border-gray-300 bg-white  p-3 lg:p-4  transition-all duration-300 hover:scale-105 animate-fade-in"
                 >
                   <div className="relative lg:w-1/2 overflow-hidden">
                     <img
@@ -202,7 +211,7 @@ const Home = () => {
 
         {/* Bagian Layanan */}
         <div className="flex flex-col items-center text-font1 py-10 space-y-10">
-          <div className="lg:text-md border border-font1 border-opacity-50 bg-bg1 py-2 px-4 lg:px-10">
+          <div className="lg:text-md border  border-gray-300 bg-white py-2 px-4 lg:px-10">
             <p>Layanan Kelurahan Tlogosari</p>
           </div>
 
@@ -213,7 +222,7 @@ const Home = () => {
                 className="flex flex-col items-center space-y-5 transition-transform duration-300 hover:scale-105 cursor-pointer"
                 onClick={() => window.open(item.link, "_blank")} // Buka link di tab baru
               >
-                <div className="border border-opacity-50 border-font1 bg-bg1 w-64 h-64 lg:w-46 lg:h-44 flex items-center justify-center">
+                <div className="border border-gray-300 bg-white w-64 h-64 lg:w-46 lg:h-44 flex items-center justify-center">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -226,7 +235,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

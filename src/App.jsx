@@ -17,6 +17,7 @@ import Berita from "./pages/berita/Berita";
 import Galeri from "./pages/galeri/Galeri";
 import KelembagaanPage from "./pages/kelembagaan/Kelembagaan";
 import PemberdayaanPage from "./pages/pemberdayaan/Pemberdayaan";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -51,6 +52,7 @@ function App() {
           </Routes>
         )}
       </Router>
+      <Toaster />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { getAllData } from "../../data/dataNewsAPI";
 import { useNavigate } from "react-router-dom";
@@ -69,7 +69,7 @@ const Berita = () => {
 
         <div className="container mx-auto px-4 lg:px-28 py-10 flex-grow">
           {data.length > 0 && (
-            <h1 className="lg:w-[250px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
+            <h1 className="lg:w-[250px] border  border-gray-300 bg-white  p-4 mb-4">
               Total{" "}
               <span className="font-semibold text-font1">{data.length}</span>{" "}
               Berita ditemukan
@@ -80,7 +80,7 @@ const Berita = () => {
               {data.map((item, index) => (
                 <div
                   key={index}
-                  className="cursor-pointer border border-font1 border-opacity-50 bg-bg1 p-4 transition-all duration-300 hover:scale-105 animate-fade-in"
+                  className="cursor-pointer border  border-gray-300 bg-white  p-4 transition-all duration-300 hover:scale-105 animate-fade-in"
                 >
                   {/* Layout Gambar dan Konten */}
                   <div className="lg:flex items-start gap-4">
@@ -145,7 +145,7 @@ const Berita = () => {
             <ErrorNews />
           )}
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

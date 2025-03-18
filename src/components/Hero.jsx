@@ -44,7 +44,7 @@ const Hero = () => {
         }}
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay diaktifkan
-        loop={sliderData.length >= 3} // Aktifkan loop hanya jika ada cukup slide
+        loop={sliderData.length > 1} // Aktifkan loop hanya jika ada cukup slide
         className="w-full" // Tambahkan tinggi yang tetap
         onBeforeInit={(swiper) => {
           swiper.params.navigation.prevEl = navigationPrevRef.current;

@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -124,7 +124,7 @@ const Sarana = () => {
         </div>
 
         <div className="container px-4 lg:px-28 py-10 min-h-screen space-y-5">
-          <div className="lg:text-md border lg:w-[240px] border-font1 border-opacity-50 bg-bg1 py-2 px-7 lg:px-5">
+          <div className="lg:text-md border lg:w-[240px]  border-gray-300 bg-white  py-2 px-7 lg:px-5">
             <p>Sarana dan Prasarana</p>
           </div>
 
@@ -146,7 +146,7 @@ const Sarana = () => {
                   {data.items.map((item, index) => (
                     <div
                       key={index}
-                      className="border border-font1 border-opacity-50 bg-bg1 p-7 lg:p-7"
+                      className="border  border-gray-300 bg-white  p-7 lg:p-7"
                     >
                       <h3 className="font-semibold">{item.name}</h3>
                       <p className="text-sm text-gray-600">
@@ -159,7 +159,7 @@ const Sarana = () => {
             ))}
           </div>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

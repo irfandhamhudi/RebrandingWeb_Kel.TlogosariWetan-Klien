@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import img from "../../assets/kel_tlogosari.jpg"; // Ganti dengan path gambar Anda
@@ -30,10 +30,10 @@ const ProfilKelurahan = () => {
 
         {/* Konten Profil Kelurahan */}
         <div className="container mx-auto px-4 lg:px-28 py-10">
-          <div className="lg:w-[220px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
+          <div className="lg:w-[220px] border  border-gray-300 bg-white  p-4 mb-4">
             <p>Profil Tlogosari Wetan</p>
           </div>
-          <div className="border border-opacity-50 border-font1 bg-bg1 p-3 md:p-5">
+          <div className="border  border-gray-300 bg-white  p-3 md:p-5">
             {/* Layout Gambar dan Teks */}
             <div className="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-8">
               {/* Gambar di sebelah kiri */}
@@ -89,10 +89,10 @@ const ProfilKelurahan = () => {
 
         {/* UMKM Unggulan */}
         <div className="container mx-auto px-4 lg:px-28">
-          <div className="lg:w-[310px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
+          <div className="lg:w-[310px] border  border-gray-300 bg-white  p-4 mb-4">
             <p>UMKM Unggulan Tlogosari Wetan</p>
           </div>
-          <div className="border border-opacity-50 border-font1 bg-bg1 p-3 md:p-7">
+          <div className="border  border-gray-300 bg-white  p-3 md:p-7">
             <div className="flex flex-col md:flex-row  items-center md:items-start space-y-8 md:space-y-0 md:space-x-8">
               {/* Gambar UMKM */}
               <div className="w-full md:w-1/2 flex flex-col  md:flex-row gap-4 md:gap-4">
@@ -144,10 +144,10 @@ const ProfilKelurahan = () => {
 
         {/* Lokasi Tlogosari Wetan */}
         <div className="container mx-auto px-4 lg:px-28 p-10">
-          <div className="lg:w-[230px] border border-font1 border-opacity-50 bg-bg1 p-4 mb-4">
+          <div className="lg:w-[230px] border  border-gray-300 bg-white  p-4 mb-4">
             <p>Lokasi Tlogosari Wetan</p>
           </div>
-          <div className="border border-opacity-50 border-font1 bg-bg1 md:p-7">
+          <div className="border  border-gray-300 bg-white  md:p-7">
             {/* Embed Google Maps */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.123456789012!2d110.4662907!3d-6.9924176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708cd8c5fc3715%3A0x9bf8fff6007b754c!2sKantor%20Kelurahan%20Tlogosari%20Wetan!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
@@ -161,7 +161,7 @@ const ProfilKelurahan = () => {
           </div>
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );
