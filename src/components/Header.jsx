@@ -2,7 +2,7 @@ import { X, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/logo-kota-semarang.png";
-import { createServiceComplain } from "../data/serviceComplain";
+import { createServiceComplain } from "../utils/data/serviceComplain";
 import toast from "react-hot-toast";
 import { HashLoader } from "react-spinners";
 
@@ -13,6 +13,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
+    title: "",
     name: "",
     email: "",
     phone: "",
@@ -59,6 +60,7 @@ const Header = () => {
     try {
       // Membuat FormData untuk mengirim file
       const formDataToSend = new FormData();
+      formDataToSend.append("title", formData.title);
       formDataToSend.append("name", formData.name);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("phone", formData.phone);
@@ -76,6 +78,7 @@ const Header = () => {
         toast.success(response.message);
         setIsModalOpen(false);
         setFormData({
+          title: "",
           name: "",
           email: "",
           phone: "",
@@ -233,7 +236,15 @@ const Header = () => {
               )}
             </li>
           ))}
-
+          <li
+            className={`text-sm ${
+              isMenuActive("/pengaduan")
+                ? "text-primary font-semibold"
+                : "text-font2 font-normal hover:text-primary hover:font-semibold"
+            }`}
+          >
+            <Link to="/pengaduan">Lihat Pengaduan</Link>
+          </li>
           <li
             className={`text-sm ${
               isMenuActive("/galeri")
@@ -252,6 +263,12 @@ const Header = () => {
           >
             <Link to="/berita">Berita</Link>
           </li>
+          {/* <button
+            // onClick={() => setIsModalOpen(true)}
+            className=" text-font2 bg-gray-200 py-2 px-4 text-sm "
+          >
+            Lihat Pengaduan
+          </button> */}
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-primary hover:bg-secondary text-white py-2 px-4 text-sm "
@@ -360,7 +377,15 @@ const Header = () => {
                     )}
                   </li>
                 ))}
-
+                <li
+                  className={`text-sm ${
+                    isMenuActive("/pengaduan")
+                      ? "text-primary font-semibold"
+                      : "text-font2 font-normal hover:text-primary hover:font-semibold"
+                  }`}
+                >
+                  <Link to="/pengaduan">Lihat Pengaduan</Link>
+                </li>
                 <li
                   className={`text-sm ${
                     isMenuActive("/galeri")
@@ -379,6 +404,13 @@ const Header = () => {
                 >
                   <Link to="/berita">Berita</Link>
                 </li>
+
+                {/* <button
+                  // onClick={() => setIsModalOpen(true)}
+                  className="bg-primary hover:bg-secondary text-white py-2 px-4 text-sm "
+                >
+                  Lihat Pengaduan Layanan
+                </button> */}
                 <button
                   onClick={() => setIsModalOpen(true)}
                   className="bg-primary hover:bg-secondary text-white py-2 px-4 text-sm "
@@ -404,6 +436,19 @@ const Header = () => {
                 Pengaduan Layanan
               </h2>
               <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label className="block text-sm text-font2">
+                    Judul Pengaduan <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    className="mt-1 p-2 w-full border "
+                    required
+                  />
+                </div>
                 <div className="mb-4">
                   <label className="block text-sm text-font2">
                     Nama <span className="text-red-500">*</span>

@@ -5,7 +5,7 @@ import Hero from "../components/Hero";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { data } from "../components/data/data"; // Impor data layanan
-import { getAllData } from "../data/dataNewsAPI"; // Impor fungsi untuk mengambil data berita
+import { getAllData } from "../utils/data/dataNewsAPI"; // Impor fungsi untuk mengambil data berita
 import { formatTitleForURL } from "../utils/formatTitle";
 import { User, Building2, Building, Map } from "lucide-react";
 

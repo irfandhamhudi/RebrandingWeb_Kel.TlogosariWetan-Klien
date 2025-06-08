@@ -17,6 +17,7 @@ import Berita from "./pages/berita/Berita";
 import Galeri from "./pages/galeri/Galeri";
 import KelembagaanPage from "./pages/kelembagaan/Kelembagaan";
 import PemberdayaanPage from "./pages/pemberdayaan/Pemberdayaan";
+import PengaduanPage from "./pages/pengaduan/LihatPengaduan";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
             <Route path="/berita" element={<Berita />} />
             <Route path="/kelembagaan" element={<KelembagaanPage />} />
             <Route path="/pemberdayaan" element={<PemberdayaanPage />} />
+            <Route path="/pengaduan" element={<PengaduanPage />} />
             <Route path="*" element={<Error />} />
           </Routes>
         )}

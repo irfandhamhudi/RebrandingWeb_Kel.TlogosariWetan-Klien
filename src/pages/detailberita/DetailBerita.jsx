@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
-import { getDataByTitle } from "../../data/dataNewsAPI"; // Sesuaikan path-nya
+import { getDataByTitle } from "../../utils/data/dataNewsAPI"; // Sesuaikan path-nya
 import { HashLoader } from "react-spinners";
 
 const DetailBerita = () => {

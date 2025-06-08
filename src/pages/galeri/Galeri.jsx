@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
-import { getAllData } from "../../data/dataNewsAPI";
+import { getAllData } from "../../utils/data/dataNewsAPI";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { HashLoader } from "react-spinners";

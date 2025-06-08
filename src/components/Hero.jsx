@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { getAllSlider } from "../data/Slider"; // Pastikan path ini benar
+import { getAllSlider } from "../utils/data/Slider"; // Pastikan path ini benar
 
 const Hero = () => {
   const navigationPrevRef = useRef(null);

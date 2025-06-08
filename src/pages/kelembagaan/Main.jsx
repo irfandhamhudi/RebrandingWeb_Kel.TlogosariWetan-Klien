@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getDataByBidang } from "../../data/dataNewsAPI";
+import { getDataByBidang } from "../../utils/data/dataNewsAPI";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
