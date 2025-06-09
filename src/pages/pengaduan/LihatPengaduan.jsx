@@ -257,7 +257,7 @@ const LihatPengaduan = () => {
                 selectedComplaint.images.length > 0 && (
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold">Gambar Pengaduan</h4>
-                    <div className="flex  gap-2 mt-2 border border-gray-300 p-4">
+                    <div className="flex flex-wrap  gap-2 mt-2 border border-gray-300 p-4">
                       {selectedComplaint.images.map((image, index) => (
                         <img
                           key={index}
