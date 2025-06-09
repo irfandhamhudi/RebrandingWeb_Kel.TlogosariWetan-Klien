@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import { ChevronRight } from "lucide-react";
 import { getAllServiceComplain } from "../../utils/data/serviceComplain";
 import userImg from "../../assets/user.png";
+import ErrorNews from "../error/errorNews";
 
 const LihatPengaduan = () => {
   const navigate = useNavigate();
@@ -117,9 +118,7 @@ const LihatPengaduan = () => {
 
           {loading && <p className="text-center">Memuat pengaduan...</p>}
           {error && <p className="text-center text-red-500">{error}</p>}
-          {!loading && !error && complaints.length === 0 && (
-            <p className="text-center">Tidak ada pengaduan.</p>
-          )}
+          {!loading && !error && complaints.length === 0 && <ErrorNews />}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto">
             {currentComplaints.map((complaint) => (
