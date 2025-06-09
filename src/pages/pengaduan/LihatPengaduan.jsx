@@ -216,7 +216,7 @@ const LihatPengaduan = () => {
       {/* Modal */}
       {isModalOpen && selectedComplaint && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+          <div className="bg-white p-6 max-w-2xl w-[90%] max-h-[80vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Detail Pengaduan</h2>
             </div>
@@ -258,13 +258,13 @@ const LihatPengaduan = () => {
                 selectedComplaint.images.length > 0 && (
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold">Gambar Pengaduan</h4>
-                    <div className="flex flex-wrap gap-2 mt-2 border border-gray-300 p-4">
+                    <div className="flex  gap-2 mt-2 border border-gray-300 p-4">
                       {selectedComplaint.images.map((image, index) => (
                         <img
                           key={index}
                           src={image}
                           alt={`Gambar pengaduan ${index + 1}`}
-                          className="w-32 h-32 object-cover"
+                          className="w-28 h-28 object-cover"
                           onError={(e) =>
                             (e.target.src = "/placeholder-image.jpg")
                           }
