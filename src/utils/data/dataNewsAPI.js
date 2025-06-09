@@ -1,8 +1,8 @@
 // src/api.js
 import axios from "axios";
 
-// const API_URL = "https://api-website-delta.vercel.app/api/v1/data"; // Sesuaikan dengan URL backend
-const API_URL = "http://localhost:5000/api/v1/data";
+const API_URL = "https://apiwebsite-production.up.railway.app/api/v1/data"; // Sesuaikan dengan URL backend
+// const API_URL = "http://localhost:5000/api/v1/data";
 
 export const createData = async (formData) => {
   try {
