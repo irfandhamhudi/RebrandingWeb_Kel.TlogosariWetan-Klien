@@ -131,7 +131,7 @@ const LihatPengaduan = () => {
                     Tidak ada pengaduan.
                   </h1>
                   <p className="text-gray-600 mb-8">
-                    Silakan cek kembali nanti atau pilih bidang lainnya.
+                    Silahkan tambahkan pengaduan.
                   </p>
                 </div>
               </div>
