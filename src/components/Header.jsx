@@ -1,11 +1,10 @@
 import { X, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import logo from "../assets/logo-kota-semarang.png";
 import { createServiceComplain } from "../utils/data/serviceComplain";
 import toast from "react-hot-toast";
 import { HashLoader } from "react-spinners";
-import { getAllBidang } from "../utils/data/bidangAPI";
 
 const Header = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -20,57 +19,8 @@ const Header = () => {
     phone: "",
     msg: "",
     images: [],
-    previewImages: [],
+    // previewImages: [], // Tambahkan ini
   });
-  const [kelembagaanItems, setKelembagaanItems] = useState([]);
-  const [pemberdayaanItems, setPemberdayaanItems] = useState([]);
-
-  // Fetch bidang data for Kelembagaan and Pemberdayaan
-  useEffect(() => {
-    const fetchBidangData = async () => {
-      try {
-        const response = await getAllBidang();
-        if (!response) {
-          throw new Error("No response from getAllBidang");
-        }
-        if (response.success && Array.isArray(response.data)) {
-          // Define which names belong to each category
-          const kelembagaanNames = ["Umum", "LPMK", "PKK", "FKK", "BKM"];
-          const pemberdayaanNames = [
-            "Kamtibmas",
-            "Kesehatan",
-            "Pariwisata",
-            "Pendidikan",
-          ];
-
-          // Filter and map for Kelembagaan (no "Bidang" prefix)
-          const kelembagaanData = response.data
-            .filter((item) => kelembagaanNames.includes(item.name))
-            .map((item) => ({
-              label: item.name,
-              path: `/kelembagaan/${item.name}`,
-            }));
-          setKelembagaanItems(kelembagaanData);
-
-          // Filter and map for Pemberdayaan (with "Bidang" prefix)
-          const pemberdayaanData = response.data
-            .filter((item) => pemberdayaanNames.includes(item.name))
-            .map((item) => ({
-              label: `Bidang ${item.name}`,
-              path: `/pemberdayaan/${item.name}`,
-            }));
-          setPemberdayaanItems(pemberdayaanData);
-        } else {
-          toast.error("Gagal memuat data bidang: Respons tidak valid.");
-        }
-      } catch (error) {
-        console.error("Error fetching bidang:", error);
-        toast.error("Terjadi kesalahan saat memuat data bidang.");
-      }
-    };
-
-    fetchBidangData();
-  }, []);
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -85,7 +35,7 @@ const Header = () => {
     setFormData((prevData) => ({
       ...prevData,
       images: [...prevData.images, ...files],
-      previewImages: [...(prevData.previewImages || []), ...newFileURLs],
+      previewImages: [...(prevData.previewImages || []), ...newFileURLs], // Pastikan prevData.previewImages ada
     }));
   };
 
@@ -94,7 +44,7 @@ const Header = () => {
       const updatedFiles = prevData.images.filter((_, i) => i !== index);
       const updatedPreviews = (prevData.previewImages || []).filter(
         (_, i) => i !== index
-      );
+      ); // Pastikan prevData.previewImages ada
       return {
         ...prevData,
         images: updatedFiles,
@@ -108,6 +58,7 @@ const Header = () => {
     setIsLoading(true);
 
     try {
+      // Membuat FormData untuk mengirim file
       const formDataToSend = new FormData();
       formDataToSend.append("title", formData.title);
       formDataToSend.append("name", formData.name);
@@ -115,10 +66,12 @@ const Header = () => {
       formDataToSend.append("phone", formData.phone);
       formDataToSend.append("msg", formData.msg);
 
+      // Menambahkan file ke FormData
       formData.images.forEach((file) => {
         formDataToSend.append(`images`, file);
       });
 
+      // Memanggil fungsi createServiceComplain
       const response = await createServiceComplain(formDataToSend);
 
       if (response.success) {
@@ -131,7 +84,7 @@ const Header = () => {
           phone: "",
           msg: "",
           images: [],
-          previewImages: [],
+          // previewImages: [],
         });
       } else {
         toast.error(response.message);
@@ -225,12 +178,29 @@ const Header = () => {
             {
               label: "Kelembagaan",
               path: "/kelembagaan",
-              submenus: kelembagaanItems,
+              submenus: [
+                { label: "Umum", path: "/kelembagaan/Umum" },
+                { label: "LPMK", path: "/kelembagaan/LPMK" },
+                { label: "PKK", path: "/kelembagaan/PKK" },
+                { label: "FKK", path: "/kelembagaan/FKK" },
+                { label: "BKM", path: "/kelembagaan/BKM" },
+              ],
             },
             {
               label: "Pemberdayaan",
               path: "/pemberdayaan",
-              submenus: pemberdayaanItems,
+              submenus: [
+                { label: "Bidang Kamtibmas", path: "/pemberdayaan/Kamtibmas" },
+                { label: "Bidang Kesehatan", path: "/pemberdayaan/Kesehatan" },
+                {
+                  label: "Bidang Pariwisata",
+                  path: "/pemberdayaan/Pariwisata",
+                },
+                {
+                  label: "Bidang Pendidikan",
+                  path: "/pemberdayaan/Pendidikan",
+                },
+              ],
             },
           ].map((item, index) => (
             <li
@@ -241,9 +211,10 @@ const Header = () => {
                   : "text-font2 font-normal hover:text-primary hover:font-semibold"
               }`}
               onMouseEnter={() => toggleDropdown(item.label)}
+              // onMouseLeave={closeDropdown}
             >
               <Link to={item.path}>{item.label}</Link>
-              {openDropdown === item.label && item.submenus.length > 0 && (
+              {openDropdown === item.label && (
                 <ul
                   className="absolute left-0 mt-2 w-56 bg-white border border-gray-300 shadow-md p-3"
                   onMouseEnter={() => toggleDropdown(item.label)}
@@ -292,6 +263,12 @@ const Header = () => {
           >
             <Link to="/berita">Berita</Link>
           </li>
+          {/* <button
+            // onClick={() => setIsModalOpen(true)}
+            className=" text-font2 bg-gray-200 py-2 px-4 text-sm "
+          >
+            Lihat Pengaduan
+          </button> */}
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-primary hover:bg-secondary text-white py-2 px-4 text-sm "
@@ -342,12 +319,35 @@ const Header = () => {
                   {
                     label: "Kelembagaan",
                     path: "/kelembagaan",
-                    submenus: kelembagaanItems,
+                    submenus: [
+                      { label: "Umum", path: "/kelembagaan/Umum" },
+                      { label: "LPMK", path: "/kelembagaan/LPMK" },
+                      { label: "PKK", path: "/kelembagaan/PKK" },
+                      { label: "FKK", path: "/kelembagaan/FKK" },
+                      { label: "BKM", path: "/kelembagaan/BKM" },
+                    ],
                   },
                   {
                     label: "Pemberdayaan",
                     path: "/pemberdayaan",
-                    submenus: pemberdayaanItems,
+                    submenus: [
+                      {
+                        label: "Bidang Kamtibmas",
+                        path: "/pemberdayaan/Kamtibmas",
+                      },
+                      {
+                        label: "Bidang Kesehatan",
+                        path: "/pemberdayaan/Kesehatan",
+                      },
+                      {
+                        label: "Bidang Pariwisata",
+                        path: "/pemberdayaan/Pariwisata",
+                      },
+                      {
+                        label: "Bidang Pendidikan",
+                        path: "/pemberdayaan/Pendidikan",
+                      },
+                    ],
                   },
                 ].map((item, index) => (
                   <li
@@ -359,7 +359,7 @@ const Header = () => {
                     }`}
                   >
                     <Link to={item.path}>{item.label}</Link>
-                    {item.submenus.length > 0 && (
+                    {item.submenus && (
                       <ul className="pl-4 mt-2">
                         {item.submenus.map((submenu, subIndex) => (
                           <li
@@ -404,6 +404,13 @@ const Header = () => {
                 >
                   <Link to="/berita">Berita</Link>
                 </li>
+
+                {/* <button
+                  // onClick={() => setIsModalOpen(true)}
+                  className="bg-primary hover:bg-secondary text-white py-2 px-4 text-sm "
+                >
+                  Lihat Pengaduan Layanan
+                </button> */}
                 <button
                   onClick={() => setIsModalOpen(true)}
                   className="bg-primary hover:bg-secondary text-white py-2 px-4 text-sm "
@@ -418,7 +425,7 @@ const Header = () => {
         {/* Modal Pengaduan Layanan */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-0 text-sm px-4">
-            <div className="bg-white p-7 w-full max-w-xl relative max-h-[90vh] overflow-y-auto">
+            <div className="bg-white p-7  w-full max-w-xl relative max-h-[90vh] overflow-y-auto">
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-4 right-4 text-gray-500 hover:text-font2"
