@@ -3,31 +3,29 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
-import { getDataByTitle } from "../../utils/data/dataNewsAPI"; // Sesuaikan path-nya
+import { getDatabySlug } from "../../utils/data/dataNewsAPI"; // Sesuaikan path-nya
 import { HashLoader } from "react-spinners";
 
 const DetailBerita = () => {
-  const { title } = useParams(); // Ambil parameter `title` dari URL
+  const { slug } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fungsi untuk mengambil data berdasarkan title
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getDataByTitle(title); // Panggil fungsi getDataByTitle
+        const result = await getDatabySlug(slug); // Sesuaikan fungsi-nya
         setData(result.data);
+        setLoading(false);
       } catch (err) {
-        setError(err.message || "Terjadi kesalahan saat mengambil data.");
-      } finally {
+        setError(err.message);
         setLoading(false);
       }
     };
-
     fetchData();
-  }, [title]);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -90,15 +88,27 @@ const DetailBerita = () => {
 
         <div className="flex items-center justify-center container mx-auto px-4 lg:px-28 py-10">
           <div className="border  border-gray-300 bg-white  p-6 lg:p-7  lg:w-5/6">
-            <h1 className="lg:text-2xl text-xl font-medium mb-4">
-              {data.title}
-            </h1>
-            <div className="flex items-center lg:space-x-4 mb-5 text-sm lg:justify-start justify-between">
-              <p className="bg-red-100 text-primary py-1 px-2 ">
+            <div className="flex items-center mb-5 text-xs gap-2 ">
+              <p className="bg-red-100 text-primary py-2 px-4 ">
                 {data.bidang.name}
               </p>
-              <p>
-                {data.date} - {data.time} WIB
+              <p className="bg-gray-200 text-black font-semibold px-4 py-2 text-xs">
+                {data.createdAt
+                  ? `${new Date(data.createdAt).toLocaleDateString("id-ID", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                      timeZone: "Asia/Jakarta",
+                    })} - ${new Date(data.createdAt).toLocaleTimeString(
+                      "id-ID",
+                      {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                        timeZone: "Asia/Jakarta",
+                      }
+                    )} WIB`
+                  : "-"}
               </p>
             </div>
             {data.images.length > 0 && (
@@ -116,11 +126,16 @@ const DetailBerita = () => {
               </div>
             )}
             {/* Menampilkan deskripsi sebagai paragraf yang rapi */}
-            <div className="text-font2">{descriptionParagraphs}</div>
+            <div className="text-font2">
+              <h1 className="lg:text-2xl text-xl font-medium mb-4">
+                {data.title}
+              </h1>
+              <p>{descriptionParagraphs}</p>
+            </div>
           </div>
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };

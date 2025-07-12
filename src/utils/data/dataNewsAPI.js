@@ -35,41 +35,20 @@ export const getDataByBidang = async (bidang) => {
   }
 };
 
-// Fungsi untuk mendapatkan data berdasarkan title
-export const getDataByTitle = async (title) => {
+export const getLatestData = async () => {
   try {
-    // Validasi input
-    if (!title || typeof title !== "string") {
-      throw new Error("Judul tidak valid. Harap masukkan judul yang benar.");
-    }
-
-    // Format title: ganti spasi dengan tanda hubung (-)
-    const formattedTitle = title.trim().replace(/\s+/g, "-");
-
-    // Kirim request ke backend
-    const response = await axios.get(`${API_URL}/${formattedTitle}`, {});
-
-    // Jika data ditemukan, kembalikan data
-    if (response.data.success) {
-      return response.data;
-    } else {
-      throw new Error(response.data.message || "Data tidak ditemukan.");
-    }
+    const response = await axios.get(`${API_URL}/latest`);
+    return response.data;
   } catch (error) {
-    // Tangani error dengan lebih spesifik
-    if (error.response) {
-      // Error dari server (contoh: 404, 500)
-      throw new Error(
-        error.response.data.message || "Terjadi kesalahan pada server."
-      );
-    } else if (error.request) {
-      // Tidak ada respons dari server
-      throw new Error(
-        "Tidak ada respons dari server. Periksa koneksi internet Anda."
-      );
-    } else {
-      // Error lainnya (contoh: validasi input)
-      throw new Error(error.message || "Terjadi kesalahan.");
-    }
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getDatabySlug = async (slug) => {
+  try {
+    const response = await axios.get(`${API_URL}/slug/${slug}`);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
   }
 };

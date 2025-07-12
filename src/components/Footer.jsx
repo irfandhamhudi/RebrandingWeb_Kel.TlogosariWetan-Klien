@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div>
       {/* Bagian Gambar */}
-      <div className="bg-primary p-4 lg:p-7 mt-10">
+      <div className="bg-primary p-4 lg:p-7">
         <div className="flex flex-wrap justify-center sm:gap-10 gap-4 mx-auto">
           <img
             src={imgfooter1}

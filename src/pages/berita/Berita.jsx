@@ -5,8 +5,8 @@ import { getAllData } from "../../utils/data/dataNewsAPI";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { HashLoader } from "react-spinners";
-import ErrorNews from "../error/errorNews";
-import { formatTitleForURL } from "../../utils/formatTitle";
+import Error404 from "../error/errorPage";
+// import { formatTitleForURL } from "../../utils/formatTitle";
 
 const Berita = () => {
   const navigate = useNavigate();
@@ -97,20 +97,33 @@ const Berita = () => {
 
                     {/* Konten (Judul, Deskripsi, dll.) */}
                     <div className="flex-1">
-                      <div className="lg:justify-between flex flex-col lg:flex-row items-start space-y-2 lg:space-y-0 text-xs lg:mb-2 mt-3 lg:mt-0">
+                      <div className="flex items-start gap-2 text-xs lg:mb-2 mt-3 lg:mt-0 justify-between">
                         <p className="bg-red-100 text-primary py-1 px-2 ">
                           {item.bidang.name}
                         </p>
-                        <p>
-                          {item.date} - {item.time} WIB
-                        </p>
+                        <span className="bg-gray-200 text-black font-semibold px-4 py-1 text-xs">
+                          {item.createdAt
+                            ? `${new Date(item.createdAt).toLocaleDateString(
+                                "id-ID",
+                                {
+                                  day: "2-digit",
+                                  month: "long",
+                                  year: "numeric",
+                                  timeZone: "Asia/Jakarta",
+                                }
+                              )} - ${new Date(
+                                item.createdAt
+                              ).toLocaleTimeString("id-ID", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: false,
+                                timeZone: "Asia/Jakarta",
+                              })} WIB`
+                            : "-"}
+                        </span>
                       </div>
                       <h1
-                        onClick={() =>
-                          navigate(
-                            `/detail-berita/${formatTitleForURL(item.title)}`
-                          )
-                        }
+                        onClick={() => navigate(`/detail-berita/${item.slug}`)}
                         className="lg:text-lg text-lg font-semibold cursor-pointer hover:underline mt-5 lg:mt-0 transition-all duration-200 hover:text-primary"
                       >
                         {truncateText(item.title, 60)}
@@ -142,11 +155,11 @@ const Berita = () => {
               ))}
             </div>
           ) : (
-            <ErrorNews />
+            <Error404 />
           )}
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };

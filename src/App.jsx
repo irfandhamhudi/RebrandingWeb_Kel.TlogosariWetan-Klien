@@ -38,7 +38,7 @@ function App() {
             <Route path="/profil-kelurahan" element={<ProfileKelurahan />} />
             <Route path="/kelembagaan/:bidang" element={<Kelembagaan />} />
             <Route path="/visi-misi" element={<VisiMisi />} />
-            <Route path="/detail-berita/:title" element={<DetailBerita />} />
+            <Route path="/detail-berita/:slug" element={<DetailBerita />} />
             <Route path="/regulasi" element={<Regulasi />} />
             <Route path="/sumber-daya-manusia" element={<SumberDaya />} />
             <Route path="/monografi" element={<Monografi />} />

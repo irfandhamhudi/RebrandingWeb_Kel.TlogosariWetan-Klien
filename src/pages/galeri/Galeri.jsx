@@ -5,6 +5,7 @@ import { getAllData } from "../../utils/data/dataNewsAPI";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { HashLoader } from "react-spinners";
+import Error404 from "../error/errorPage";
 
 const Galeri = () => {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ const Galeri = () => {
             </h1>
           )}
           {berita.length === 0 ? (
-            <p>Tidak ada berita yang tersedia.</p>
+            <Error404 />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {berita.map((item, index) => (
@@ -87,8 +88,8 @@ const Galeri = () => {
             </div>
           )}
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };
