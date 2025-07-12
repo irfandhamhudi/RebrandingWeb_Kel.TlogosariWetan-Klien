@@ -1,8 +1,8 @@
 // src/api.js
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/v1/galeri";
-// const API_URL = "https://apiwebsite-production.up.railway.app/api/v1/galeri";
+// const API_URL = "http://localhost:5000/api/v1/galeri";
+const API_URL = "https://apiwebsite-production.up.railway.app/api/v1/galeri";
 
 export const uploadPhoto = async (formData) => {
   try {
